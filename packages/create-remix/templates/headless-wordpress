@@ -1,0 +1,98 @@
+// packages/create-remix/templates/headless-wordpress/package.json
+{
+  "name": "headless-wordpress",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "remix dev",
+    "build": "remix build",
+    "start": "remix-serve build"
+  },
+  "dependencies": {
+    "@remix-run/react": "latest",
+    "@remix-run/serve": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "@remix-run/dev": "latest",
+    "typescript": "latest"
+  }
+}
+
+// packages/create-remix/templates/headless-wordpress/remix.config.js
+module.exports = {
+  serverBuildTarget: "node-cjs",
+  ignoredRouteFiles: [".*"]
+};
+
+// packages/create-remix/templates/headless-wordpress/tsconfig.json
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "jsx": "react-jsx",
+    "strict": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["remix.env.d.ts", "app/**/*"]
+}
+
+// packages/create-remix/templates/headless-wordpress/README.md
+# Headless WordPress Remix Template
+
+This template sets up a basic Remix app that fetches and displays data from a headless WordPress backend using the WordPress REST API.
+
+## Setup
+
+Copy the `.env.example` file to `.env` and fill in the `WORDPRESS_API_URL` with your WordPress API endpoint.
+
+## Development
+
+Run `npm run dev` to start the Remix development server.
+
+## Deployment
+
+Run `npm run build` to build the application for production, then `npm start` to start the production server.
+
+// packages/create-remix/templates/headless-wordpress/.env.example
+WORDPRESS_API_URL=
+
+// packages/create-remix/templates/headless-wordpress/app/posts/list.tsx
+import React from "react";
+
+export default function PostsList() {
+  const [posts, setPosts] = React.useState([]);
+
+  React.useEffect(() => {
+    fetch(process.env.WORDPRESS_API_URL + "/wp-json/wp/v2/posts")
+      .then((res) => res.json())
+      .then(setPosts);
+  }, []);
+
+  return (
+    <div>
+      <h1>Blog Posts</h1>
+      <ul>
+        {posts.map((post) => (
+          <li key={post.id}>{post.title.rendered}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+// packages/create-remix/templates/headless-wordpress/remix.init/index.js
+const fs = require("fs");
+const path = require("path");
+
+const envExamplePath = path.join(__dirname, "..", ".env.example");
+const envPath = path.join(__dirname, "..", ".env");
+
+fs.copyFileSync(envExamplePath, envPath);
+console.log("The .env file has been created based on .env.example. Please fill in the necessary environment variables.");
