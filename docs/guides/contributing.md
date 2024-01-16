@@ -12,6 +12,16 @@ This document will familiarize you with our development process as well as how t
 
 **To ensure your work has the best chance of being accepted, please read this before contributing anything!**
 
+## How to Contribute to Headless WordPress Integration
+
+If you wish to contribute specifically to the headless WordPress integration within Remix:
+1. Familiarize yourself with the GraphQL queries and mutations used for WordPress at [juicybabe.com/graphql](https://juicybabe.com/graphql).
+2. Take a look at the `graphql` route and the WordPress components in the `app` directory to understand the current implementation.
+3. Write integration tests under the `tests/wordpress/` directory to ensure that new functionalities are well-tested against the WordPress API.
+4. Engage with other contributors who focus on the integration by discussing in the `#wordpress-integration` channel on [Discord](https://rmx.as/discord).
+5. Ensure your code contributions follow the same style and best practices as the rest of the project, including documentation.
+6. Submit your pull request as outlined in this guide.
+
 ## Contributor License Agreement
 
 All contributors sending a Pull Request need to sign the Contributor License Agreement (CLA) that explicitly assigns ownership of the contribution to us.
@@ -170,6 +180,15 @@ You can set the base in GitHub when authoring the PR with the dropdown below the
 <img src="https://raw.githubusercontent.com/remix-run/react-router/main/static/base-branch.png" alt="" width="460" height="350" />
 
 ### Tests
+
+#### WordPress Integration Tests
+To run tests specific to the WordPress integration, use the following command:
+
+```shellscript nonumber
+yarn test:wordpress
+```
+
+This will execute the Jest test suite located under `tests/wordpress/`, which contains unit and integration tests for the `fetchGraphQLData` and `fetchGraphQLMutation` functions used in the WordPress integration.
 
 We use a mix of `jest` and `playwright` for our testing in this project. We have a suite of integration tests in the integration folder and packages have their own jest configuration, which are then referenced by the primary jest config in the root of the project.
 
