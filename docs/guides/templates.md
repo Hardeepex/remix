@@ -28,6 +28,18 @@ This is a great place to start if you're just looking to try out Remix for the f
 
 If you want more control over your server or wish to deploy to a non-node runtime—such as [Arc][arc], [Cloudflare][cloudflare], or [Deno][deno]—then you can try one of our [official templates][official_templates] from the Remix repository:
 
+#### Headless WordPress
+
+If you are looking to use WordPress as a headless CMS with Remix, the Headless WordPress template is your starting point. This template configures a Remix app to connect and fetch content from a headless WordPress backend via the WordPress REST API. This approach allows you to leverage the powerful content management capabilities of WordPress while using Remix to build a modern, fast, and scalable front-end.
+
+To create a new Remix project with this template, run the following command:
+
+```shellscript nonumber
+npx create-remix@latest --template remix-run/remix/templates/headless-wordpress
+```
+
+When setting up your project, ensure you have your WordPress REST API endpoint URL ready. You can typically find this URL by appending `/wp-json` to your WordPress site's root URL. Further customization and features can be added to the template to match your specific WordPress configurations and extend the functionality as needed.
+
 ```shellscript nonumber
 npx create-remix@latest --template remix-run/remix/templates/arc
 npx create-remix@latest --template remix-run/remix/templates/cloudflare-pages
